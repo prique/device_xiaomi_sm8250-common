@@ -7,6 +7,14 @@
             <instance>default</instance>
         </interface>
     </hal>
+     <hal format="hidl" optional="true">
+        <name>android.hardware.bluetooth.a2dp</name>
+        <version>1.0</version>
+        <interface>
+            <name>IBluetoothAudioOffload</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
     <hal format="hidl" optional="true">
         <name>android.hardware.bluetooth.audio</name>
         <version>2.1</version>
