@@ -269,7 +269,40 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.mapper@1.1.vendor \
     vendor.qti.hardware.display.mapper@2.0.vendor \
     vendor.qti.hardware.display.mapper@3.0.vendor \
-    vendor.qti.hardware.display.mapper@4.0.vendor
+    vendor.qti.hardware.display.mapper@4.0.vendor \
+    vendor.qti.hardware.display.mapperextensions@1.0.vendor \
+    vendor.qti.hardware.display.mapperextensions@1.1.vendor \
+    vendor.qti.hardware.display.mapperextensions@1.2.vendor \
+    vendor.qti.hardware.display.demura@1.0.vendor \
+    vendor.qti.hardware.display.demura@2.0.vendor
+
+# Enable app/sf phase offset as durations. The numbers below are translated from the existing
+# positive offsets by finding the duration app/sf will have with the offsets.
+# For SF the previous value was 6ms which under 16.6ms vsync time (60Hz) will leave SF with ~10.5ms
+# for each frame. For App the previous value was 2ms which under 16.6ms vsync time will leave the
+# App with ~20.5ms (16.6ms * 2 - 10.5ms - 2ms). The other values were calculated similarly.
+# Full comparison between the old vs. the new values are captured in
+# https://docs.google.com/spreadsheets/d/1a_5cVNY3LUAkeg-yL56rYQNwved6Hy-dvEcKSxp6f8k/edit
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.use_phase_offsets_as_durations=1
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.late.sf.duration=10500000
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.late.app.duration=20500000
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.early.sf.duration=16000000
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.early.app.duration=16500000
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.earlyGl.sf.duration=13500000
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.earlyGl.app.duration=21000000
+
+# Enable backpressure for GL comp
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.enable_gl_backpressure=1
+
+# Enable EGL image tracking on SF for b/137514000
+PRODUCT_PROPERTY_OVERRIDES += debug.sf.enable_egl_image_tracker=1
+
+# Screen density
+TARGET_SCREEN_DENSITY := 420
+TARGET_SCREEN_HEIGHT := 2400
+TARGET_SCREEN_WIDTH := 1080
 
 # DRM
 PRODUCT_PACKAGES += \
