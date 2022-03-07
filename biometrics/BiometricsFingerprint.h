@@ -89,8 +89,6 @@ private:
     xiaomi_fingerprint_device_t *mDevice;
     bool mFod;
     sp<ITouchFeature> mTouchFeatureService;
-    Return<void> onShowUdfpsOverlay() override;
-    Return<void> onHideUdfpsOverlay() override;
 };
 
 }  // namespace implementation
